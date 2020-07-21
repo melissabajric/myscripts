@@ -8,12 +8,11 @@
   This script is provided as-is with no warranties expressed or implied. 
   This script is a quick and dirty example of how one could update Teams chat and channel retention policies. 
   USE AT YOUR OWN RISK!
-  
-  
+    
 .NOTES
   Version:        2.0
   Author:         Melissa Bajric
-  Blog:			  https://melissabajric.us
+  Blog:			      https://melissabajric.us
   Creation Date:  16 June 2020
   Purpose/Change: Initial script development
   Modified Date:  30 June 2020 by mebajric -Updated added functions and updates for Teams channel messages retention policy
