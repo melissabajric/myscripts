@@ -1,1 +1,0 @@
-Credit to Seth McClure for sharing UserDump.cqdx
