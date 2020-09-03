@@ -1,0 +1,1 @@
+Scripts created out of request for removing Everyone except external users from OneDrive site permissions
