@@ -71,7 +71,7 @@ while (($readEachLine = $newStreamReader.ReadLine()) -ne $null)
     "Original OneDrive perms: " | out-file $logFile -append
     $users | out-file $logFile -append
     
-    #Remove Group
+    #Remove Group - Update the guid with the guid of your everyone except external users guid
     Remove-SPOUser -Site $url -LoginName "c:0-.f|rolemanager|spo-grid-all-users/a6b27fb1-cd85-4932-bc29-05ab5890a64a" -Group $group.LoginName
     Write-Host "Removed group" 
     "Removed group" | out-file $logFile -append
