@@ -57,7 +57,7 @@ $adminsPersonalSite = $creds.UserName.Replace('@','_').Replace('.','_')
     "Original OneDrive perms: " | out-file $logFile -append
     $listusers | out-file $logFile -append
     
-    #Remove Group - comment out these lines to add the group
+    #Remove Group - comment out these lines to add the group - update the guid with the guid of your everyone except external users guid
     Remove-SPOUser -Site $url -LoginName "c:0-.f|rolemanager|spo-grid-all-users/a6b27fb1-cd85-4932-bc29-05ab5890a64a" -Group $group.LoginName
     #Remove-SPOUser -Site $url -LoginName "c:0t.c|tenant|1b92dd5d-6cff-429a-9a77-79de8b445beb" -Group $group.LoginName
     Write-Host "Removed group" 
