@@ -1,6 +1,7 @@
-﻿#
+#
 # Melissa Bajric
 # 09/03/2020
+# Add/Remove SCA permissions portion yanked from a script provided by colleague, David Wilborn
 # 
 # Description: 
 # Ths script has a 7 second pause after prcessing each OneDrive
