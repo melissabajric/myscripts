@@ -1,7 +1,8 @@
-﻿#
+#
 # Melissa Bajric
 # 09/03/2020
-# 
+# Add/Remove SCA permissions portion yanked from a script provided by colleague, David Wilborn
+#
 # Description: 
 # $tenantAdminUrl - should be in the format https://tenantName-admin.sharepoint.com
 # 
