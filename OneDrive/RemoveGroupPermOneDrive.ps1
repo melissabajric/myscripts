@@ -1,6 +1,7 @@
 ﻿#
 # Melissa Bajric
 # 09/03/2020
+# 09/14/2020 - Added counter
 # 
 # Description: 
 # Ths script has a 7 second pause after prcessing each OneDrive
@@ -8,6 +9,7 @@
 # $tenantAdminUrl - should be in the format https://tenantName-admin.sharepoint.com
 # 
 # This script will prompt for SPO global admin credentials the first run, and then iterate thru each ODB site and output
+# Add/Remove SCA permissions portion yanked from a script provided by colleague, David Wilborn
 #
 # **Must TEMPORARILY TURN OFF MFA FOR THIS TO WORK!!!!
 #
