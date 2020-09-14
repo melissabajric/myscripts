@@ -1,6 +1,7 @@
-﻿#
+#
 # Melissa Bajric
 # 09/03/2020
+# 09/14/2020 - Added counter
 # 
 # Description: 
 # $tenantAdminUrl - should be in the format https://tenantName-admin.sharepoint.com
