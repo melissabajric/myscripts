@@ -1,8 +1,7 @@
-#
+﻿#
 # Melissa Bajric
 # 09/03/2020
-# Add/Remove SCA permissions portion yanked from a script provided by colleague, David Wilborn
-#
+# 
 # Description: 
 # $tenantAdminUrl - should be in the format https://tenantName-admin.sharepoint.com
 # 
@@ -44,7 +43,8 @@ $totalAcctsCount = $totalAccts.Lines
 
 $date = Get-Date -Format U
 "========================================================================" | out-file $logFile -append
-"Started Get-Remove Perms at " + $date + " (UTC time)" | out-file $logFile -append
+"Started Get-Remove Perms on " + $date + " (UTC time)" | out-file $logFile -append
+"This log will iterate through " + $($totalAcctsCount) + " users OneDrive's" | out-file $logFile -append
 "========================================================================" | out-file $logFile -append
 
 $adminsPersonalSite = $creds.UserName.Replace('@','_').Replace('.','_')
@@ -54,11 +54,11 @@ while (($readEachLine = $newStreamReader.ReadLine()) -ne $null)
     $counter++
     try
     {
-
+    $item = $counter
     $site = Get-SPOSite $readEachLine | select Url 
     $url = $site.url
-    Write-Host $url
-    $url | out-file $logFile -append
+    Write-Host $url 
+    "$($url) is OneDrive $($item) of $($totalAcctsCount)"| out-file $logFile -append
    
     if(-not $url.Contains($adminsPersonalSite)){
         #Set the spouser as admin else it will get access denied on getting role assignments
@@ -72,7 +72,7 @@ while (($readEachLine = $newStreamReader.ReadLine()) -ne $null)
     "Original OneDrive perms: " | out-file $logFile -append
     $users | out-file $logFile -append
     
-    #Remove Group - Update the guid with the guid of your everyone except external users guid
+    #Remove Group
     Remove-SPOUser -Site $url -LoginName "c:0-.f|rolemanager|spo-grid-all-users/a6b27fb1-cd85-4932-bc29-05ab5890a64a" -Group $group.LoginName
     Write-Host "Removed group" 
     "Removed group" | out-file $logFile -append
@@ -109,8 +109,8 @@ while (($readEachLine = $newStreamReader.ReadLine()) -ne $null)
         Set-SPOUser -site $url -LoginName $creds.UserName -IsSiteCollectionAdmin $False
     }
 
-Write-Host "Done with: " $url
-"Done with: $($url) " | out-file $logFile -append
+Write-Host "Done with: $($url) is $($item) of $($totalAcctsCount)"
+"Done with: $($url) is $($item) of $($totalAcctsCount)" | out-file $logFile -append
 " " | out-file $logFile -append
     }
 catch [system.Exception]

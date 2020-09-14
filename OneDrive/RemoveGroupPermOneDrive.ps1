@@ -1,7 +1,6 @@
-#
+﻿#
 # Melissa Bajric
 # 09/03/2020
-# Add/Remove SCA permissions portion yanked from a script provided by colleague, David Wilborn
 # 
 # Description: 
 # Ths script has a 7 second pause after prcessing each OneDrive
@@ -33,19 +32,24 @@ connect-sposervice -url $tenantAdminUrl -Credential $creds
 $siteUrls = Get-SPOSite -IncludePersonalSite $true -Limit all -Filter "Url -like '-my.sharepoint.com/personal/" | select Url 
 $SPOCreds = New-Object Microsoft.SharePoint.Client.SharePointOnlineCredentials($creds.UserName, $creds.Password)
 
+$num = $siteUrls.Count
+$counter = 1
+
 $logFile = [Environment]::GetFolderPath("Desktop") + "\OneDriveSites.log"
 
 $date = Get-Date -Format U
 "========================================================================" | out-file $logFile -append
-"Started Get-Remove Perms at " + $date + " (UTC time)" | out-file $logFile -append
+"Started Get-Remove Perms on " + $($date) + " (UTC time)" | out-file $logFile -append
+"This log will iterate through " + $($num) + " users OneDrive's" | out-file $logFile -append
 "========================================================================" | out-file $logFile -append
 
 $adminsPersonalSite = $creds.UserName.Replace('@','_').Replace('.','_')
 
 foreach($obj in $siteUrls){
+    $item = $counter++  
     $url = $obj.url
     Write-Host $url
-    $url | out-file $logFile -append
+    "$($url) OneDrive is $($item) of $($num)"| out-file $logFile -append
    
     if(-not $url.Contains($adminsPersonalSite)){
         #Set the spouser as admin else it will get access denied on getting role assignments
@@ -61,7 +65,7 @@ foreach($obj in $siteUrls){
     
     #Remove Group
     Remove-SPOUser -Site $url -LoginName "c:0-.f|rolemanager|spo-grid-all-users/a6b27fb1-cd85-4932-bc29-05ab5890a64a" -Group $group.LoginName
-    Write-Host "Removed group" 
+    Write-Host "Removed group"  
     "Removed group" | out-file $logFile -append
     " " | out-file $logFile -append
    
@@ -95,9 +99,9 @@ foreach($obj in $siteUrls){
         #Now remove the Spo user permission
         Set-SPOUser -site $url -LoginName $creds.UserName -IsSiteCollectionAdmin $False
     }
-   
-Write-Host "Done with: " $url
-"Done with: $($url) " | out-file $logFile -append
+
+Write-Host "Done with: $($url) is $($item) of $($num)"
+"Done with: $($url) is $($item) of $($num)" | out-file $logFile -append
 " " | out-file $logFile -append
 Start-Sleep -seconds 7
 }
